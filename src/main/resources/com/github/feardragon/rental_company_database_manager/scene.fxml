@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1236.0" prefWidth="1918.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.feardragon.rental_company_database_manager.FXMLController">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button mnemonicParsing="false" onAction="#printExpenses" text="Expenses" />
+            <Button mnemonicParsing="false" onAction="#printIncome" text="Income" />
+            <Button mnemonicParsing="false" onAction="#printHouses" text="Houses" />
+        </items>
+      </ToolBar>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="expensesTable" prefHeight="200.0" prefWidth="1119.0">
+                     <columns>
+                        <TableColumn fx:id="expenseID" editable="false" prefWidth="50.0" text="ID" />
+                        <TableColumn fx:id="expenseHouse" prefWidth="250.0" text="House" />
+                        <TableColumn fx:id="expenseName" prefWidth="200.0" text="Name" />
+                        <TableColumn fx:id="expensePrice" prefWidth="75.0" text="Price" />
+                        <TableColumn fx:id="expenseDate" prefWidth="75.0" text="Date" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="incomeTable" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="incomeID" editable="false" prefWidth="50.0" text="ID" />
+                      <TableColumn fx:id="incomeHouse" prefWidth="250.0" text="House" />
+                        <TableColumn fx:id="incomeName" prefWidth="200.0" text="Name" />
+                        <TableColumn fx:id="incomeAmount" prefWidth="75.0" text="Amount" />
+                        <TableColumn fx:id="datePaid" prefWidth="75.0" text="Date Paid" />
+                        <TableColumn fx:id="dateDue" prefWidth="75.0" text="Due Date" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="housesTable" prefHeight="200.0" prefWidth="200.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="houseID" editable="false" prefWidth="50.0" text="ID" />
+                      <TableColumn fx:id="houseAddress" prefWidth="200.0" text="Street Address" />
+                        <TableColumn fx:id="houseCity" prefWidth="100.0" text="City" />
+                        <TableColumn fx:id="houseCounty" prefWidth="100.0" text="County" />
+                        <TableColumn fx:id="houseState" prefWidth="40.0" text="State" />
+                        <TableColumn fx:id="houseZip" prefWidth="75.0" text="Zip Code" />
+                        <TableColumn fx:id="houseFirstName" prefWidth="125.0" text="First Name" />
+                        <TableColumn fx:id="houseLastName" prefWidth="125.0" text="Last Name" />
+                        <TableColumn fx:id="houseEmail" prefWidth="200.0" text="Email" />
+                        <TableColumn fx:id="housePhone" prefWidth="125.0" text="Phone Number" />
+                    </columns>
+                  </TableView>
+               </children>
+            </StackPane>
+            <SplitPane dividerPositions="0.3" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                          <items>
+                            <Button mnemonicParsing="false" text="Enter Entry" />
+                          </items>
+                        </ToolBar>
+                     </top>
+                     <left>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="custom-menu-vbox" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="custom-menu-button" stylesheets="@styles.css" text="Expenses" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="custom-menu-button" stylesheets="@styles.css" text="Income" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="custom-menu-button" stylesheets="@styles.css" text="Houses" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </left>
+                     <center>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="37.0" layoutY="37.0" text="House" />
+                                    <ComboBox fx:id="expenseHouseComboBox" layoutX="84.0" layoutY="33.0" prefHeight="25.0" prefWidth="275.0" />
+                                    <Label layoutX="37.0" layoutY="99.0" text="Expense Name" />
+                                    <TextField fx:id="expenseNameField" layoutX="147.0" layoutY="95.0" prefHeight="25.0" prefWidth="250.0" />
+                                    <Label layoutX="37.0" layoutY="163.0" text="Expense Price" />
+                                    <Label layoutX="37.0" layoutY="219.0" text="Date" />
+                                    <TextField fx:id="expensePriceField" layoutX="147.0" layoutY="159.0" onAction="#handleExpensePriceAction" prefHeight="25.0" prefWidth="127.0" />
+                                    <DatePicker fx:id="expenseDateField" layoutX="102.0" layoutY="215.0" />
+                                    <Button layoutX="76.0" layoutY="308.0" mnemonicParsing="false" onAction="#enterExpense" text="Button" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </StackPane>
+                     </center>
+                  </BorderPane>
+              </items>
+            </SplitPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,27 @@
+.label {
+    -fx-text-fill: purple;
+    -fx-font-family: "Times New Roman";
+}
+
+.button {
+    -fx-background-color: dimgray;
+    -fx-text-fill: white;
+}
+
+.custom-menu-button {
+    -fx-background-color: gainsboro;
+    -fx-text-fill: black;
+    -fx-border: none;
+}
+
+.custom-menu-vbox {
+    -fx-background-color: gainsboro;
+}
+
+.custom-menu-button:hover {
+    -fx-background-color: gray;
+}
+
+.root {
+    -fx-background-color: lightcyan;
+}

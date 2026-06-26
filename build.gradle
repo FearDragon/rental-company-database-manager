@@ -1,0 +1,44 @@
+plugins {
+    id 'application'
+    id 'com.github.gmazzo.buildconfig' version '6.0.9'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'com.github.feardragon.rental_company_database_manager'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:6.0.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'com.mysql:mysql-connector-j:9.7.0'
+    implementation 'com.zaxxer:HikariCP:7.0.2'
+    implementation 'org.slf4j:slf4j-simple:2.0.18'
+}
+
+javafx {
+    version = "26.0.1"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+buildConfig {
+    def url = project.findProperty('url') ?: ""
+    def user = project.findProperty('username') ?: ""
+    def pass = project.findProperty('password') ?: ""
+
+    buildConfigField('String', 'URL', url)
+    buildConfigField('String', 'USER', user)
+    buildConfigField('String', 'PASS', pass)
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass.set('com.github.feardragon.rental_company_database_manager.Main')
+}
