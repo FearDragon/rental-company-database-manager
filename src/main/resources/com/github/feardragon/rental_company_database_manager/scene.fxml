@@ -78,16 +78,16 @@
                      <left>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="custom-menu-vbox" stylesheets="@styles.css" BorderPane.alignment="CENTER">
                            <children>
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="custom-menu-button" stylesheets="@styles.css" text="Expenses" VBox.vgrow="ALWAYS" />
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="custom-menu-button" stylesheets="@styles.css" text="Income" VBox.vgrow="ALWAYS" />
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="custom-menu-button" stylesheets="@styles.css" text="Houses" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printEnterExpenseMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Expenses" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printEnterIncomeMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Income" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printEnterHousesMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Houses" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                      </left>
                      <center>
                         <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                              <AnchorPane fx:id="enterExpenseMenu" prefHeight="200.0" prefWidth="200.0" visible="false">
                                  <children>
                                     <Label layoutX="37.0" layoutY="37.0" text="House" />
                                     <ComboBox fx:id="expenseHouseComboBox" layoutX="84.0" layoutY="33.0" prefHeight="25.0" prefWidth="275.0" />
@@ -95,11 +95,26 @@
                                     <TextField fx:id="expenseNameField" layoutX="147.0" layoutY="95.0" prefHeight="25.0" prefWidth="250.0" />
                                     <Label layoutX="37.0" layoutY="163.0" text="Expense Price" />
                                     <Label layoutX="37.0" layoutY="219.0" text="Date" />
-                                    <TextField fx:id="expensePriceField" layoutX="147.0" layoutY="159.0" onAction="#handleExpensePriceAction" prefHeight="25.0" prefWidth="127.0" />
+                                    <TextField fx:id="expensePriceField" layoutX="147.0" layoutY="159.0" onAction="#handleExpensePriceAction" prefHeight="25.0" prefWidth="125.0" />
                                     <DatePicker fx:id="expenseDateField" layoutX="102.0" layoutY="215.0" />
                                     <Button layoutX="76.0" layoutY="308.0" mnemonicParsing="false" onAction="#enterExpense" text="Button" />
                                  </children>
                               </AnchorPane>
+                              <AnchorPane fx:id="enterIncomeMenu" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="37.0" layoutY="37.0" text="House" />
+                                    <ComboBox fx:id="incomeHouseComboBox" layoutX="84.0" layoutY="33.0" prefHeight="25.0" prefWidth="275.0" />
+                                    <Label layoutX="37.0" layoutY="99.0" text="Income Name" />
+                                    <Label layoutX="37.0" layoutY="163.0" text="Income Amount" />
+                                    <Label layoutX="37.0" layoutY="219.0" text="Date Paid" />
+                                    <Label layoutX="37.0" layoutY="272.0" text="Due Date" />
+                                    <TextField layoutX="136.0" layoutY="95.0" prefHeight="25.0" prefWidth="250.0" />
+                                    <TextField fx:id="incomeAmountField" layoutX="147.0" layoutY="159.0" onAction="#handleIncomeAmountAction" prefWidth="125.0" />
+                                    <DatePicker fx:id="incomeDatePaid" layoutX="104.0" layoutY="215.0" />
+                                    <DatePicker fx:id="incomeDateDue" layoutX="104.0" layoutY="268.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="enterHousesMenu" prefHeight="200.0" prefWidth="200.0" visible="false" />
                            </children>
                         </StackPane>
                      </center>

@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 public class FXMLController implements Initializable {
 
@@ -71,6 +72,8 @@ public class FXMLController implements Initializable {
 
     // Enter Expenses
     @FXML
+    private AnchorPane enterExpenseMenu;
+    @FXML
     private ComboBox<String> expenseHouseComboBox;
     @FXML
     private TextField expenseNameField;
@@ -78,6 +81,24 @@ public class FXMLController implements Initializable {
     private TextField expensePriceField;
     @FXML
     private DatePicker expenseDateField;
+
+    // Enter Income
+    @FXML
+    private AnchorPane enterIncomeMenu;
+    @FXML
+    private ComboBox<String> incomeHouseComboBox;
+    @FXML
+    private TextField incomeNameField;
+    @FXML
+    private TextField incomeAmountField;
+    @FXML
+    private DatePicker incomeDatePaid;
+    @FXML
+    private DatePicker incomeDateDue;
+
+    // Enter Houses
+    @FXML
+    private AnchorPane enterHousesMenu;
 
     private Expenses expenses;
     private Income income;
@@ -99,6 +120,7 @@ public class FXMLController implements Initializable {
 
     public void setOptions() throws SQLException {
         expenseHouseComboBox.getItems().addAll(houses.getAddresses());
+        incomeHouseComboBox.getItems().addAll(houses.getAddresses());
     }
 
     @Override
@@ -133,10 +155,15 @@ public class FXMLController implements Initializable {
             return newText.matches("^\\d*(\\.\\d{0,2})?$") ? change : null;
         };
         setupMoneyField(expensePriceField, moneyFilter);
+        setupMoneyField(incomeAmountField, moneyFilter);
     }
 
     public void handleExpensePriceAction() {
         formatMoneyField(expensePriceField);
+    }
+
+    public void handleIncomeAmountAction() {
+        formatMoneyField(incomeAmountField);
     }
 
     // Sets up the format filter the money field and adds 0's to the end when clicking off the field
@@ -185,6 +212,24 @@ public class FXMLController implements Initializable {
         expensesTable.setVisible(false);
     }
 
+    public void printEnterExpenseMenu(ActionEvent event){
+        enterExpenseMenu.setVisible(true);
+        enterIncomeMenu.setVisible(false);
+        enterHousesMenu.setVisible(false);
+    }
+
+    public void printEnterIncomeMenu(ActionEvent event){
+        enterIncomeMenu.setVisible(true);
+        enterExpenseMenu.setVisible(false);
+        enterHousesMenu.setVisible(false);
+    }
+
+    public void printEnterHousesMenu(ActionEvent event){
+        enterHousesMenu.setVisible(true);
+        enterIncomeMenu.setVisible(false);
+        enterExpenseMenu.setVisible(false);
+    }
+
     public void enterExpense(ActionEvent event){
         int houseID;
         String expenseName;
@@ -206,6 +251,36 @@ public class FXMLController implements Initializable {
         System.out.println("Selected date: " + expenseDate);
         try{
             expensesTable.getItems().add(expenses.enterEntry(houseID, expenseName, expensePrice, expenseDate));
+            System.out.println("Successfully entered entry");
+        } catch(Exception e){
+            System.out.println("Failed to enter");
+        }
+    }
+
+    public void enterIncome(ActionEvent event){
+        int houseID;
+        String incomeName;
+        BigDecimal incomeAmount;
+        Date datePaid;
+        Date dateDue;
+        if(incomeHouseComboBox.getSelectionModel().getSelectedIndex() == -1 ||
+                expenseNameField.getText().isBlank() ||
+                expensePriceField.getText().isBlank() ||
+                expenseDateField.getValue() == null) {
+            System.out.println("Please fill all the fields");
+        }
+        houseID = incomeHouseComboBox.getSelectionModel().getSelectedIndex() + 1;
+        incomeName = incomeNameField.getText();
+        incomeAmount = new BigDecimal(incomeAmountField.getText());
+        datePaid = Date.valueOf(incomeDatePaid.getValue());
+        dateDue = Date.valueOf(incomeDateDue.getValue());
+        System.out.println("Selected house: " + houseID);
+        System.out.println("Selected income: " + incomeName);
+        System.out.println("Selected amount: " + incomeAmount);
+        System.out.println("Selected date paid: " + datePaid);
+        System.out.println("Selected date due: " + dateDue);
+        try{
+            incomeTable.getItems().add(income.enterEntry(houseID, incomeName, incomeAmount, datePaid, dateDue));
             System.out.println("Successfully entered entry");
         } catch(Exception e){
             System.out.println("Failed to enter");

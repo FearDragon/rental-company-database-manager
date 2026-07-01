@@ -18,6 +18,8 @@ public class Income {
     private static final String selectByID = "SELECT * FROM income WHERE Income_id = ?";
     private static final String selectAddressFromHouseID = "SELECT * FROM houses WHERE House_id = ?";
     private static final String selectTable = "SELECT * FROM income";
+    private static final String insertEntry = "INSERT INTO income (IncomeHouseID, IncomeName, IncomeAmount, DatePaid, DateDue) values (?, ?, ?, ?, ?)";
+    private static final String getLastEntry = "SELECT * FROM income ORDER BY Income_id DESC LIMIT 1";
     HikariDataSource dataSource;
 
     public Income (HikariDataSource dataSource){
@@ -48,6 +50,34 @@ public class Income {
                 return result;
             }
         }
+    }
+
+    public int getLastID() throws SQLException{
+        int incomeID = -1;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(getLastEntry)){
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    incomeID = rs.getInt(1);
+                }
+            }
+        }
+        return incomeID;
+    }
+
+    public IncomeRow enterEntry(int incomeHouseID, String incomeName, BigDecimal incomeAmount, Date datePaid, Date dateDue) throws SQLException{
+        IncomeRow result;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(insertEntry)) {
+            pstmt.setInt(1, incomeHouseID);
+            pstmt.setString(2, incomeName);
+            pstmt.setBigDecimal(3, incomeAmount);
+            pstmt.setDate(4, datePaid);
+            pstmt.setDate(5, dateDue);
+            pstmt.executeUpdate();
+            result = getEntryByID(getLastID());
+        }
+        return result;
     }
 
     // Returns entire table
