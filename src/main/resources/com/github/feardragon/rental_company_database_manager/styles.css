@@ -22,6 +22,14 @@
     -fx-background-color: gray;
 }
 
+.custom-warning-message {
+    -fx-text-fill: red;
+}
+
+.custom-success-message {
+    -fx-text-fill: green;
+}
+
 .root {
     -fx-background-color: lightcyan;
 }

@@ -85,6 +85,12 @@ public class FXMLController implements Initializable {
     private TextField expensePriceField;
     @FXML
     private DatePicker expenseDateField;
+    @FXML
+    private Label enterExpenseWarning;
+    @FXML
+    private Label enterExpenseFailed;
+    @FXML
+    private Label enterExpenseSuccess;
 
     // Enter Income
     @FXML
@@ -99,6 +105,12 @@ public class FXMLController implements Initializable {
     private DatePicker incomeDatePaid;
     @FXML
     private DatePicker incomeDateDue;
+    @FXML
+    private Label enterIncomeWarning;
+    @FXML
+    private Label enterIncomeFailed;
+    @FXML
+    private Label enterIncomeSuccess;
 
     // Enter Houses
     ObservableList<String> states = FXCollections.observableArrayList(
@@ -127,6 +139,14 @@ public class FXMLController implements Initializable {
     private TextField housesFirstNameField;
     @FXML
     private TextField housesLastNameField;
+    @FXML
+    private Label enterHouseWarning;
+    @FXML
+    private Label enterHouseFailed;
+    @FXML
+    private Label enterHouseSuccess;
+    @FXML
+    private Label enterHouseEmailWarning;
 
 
     private Expenses expenses;
@@ -202,7 +222,9 @@ public class FXMLController implements Initializable {
         housesEmailField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
                 if(!housesEmailField.getText().contains("@") || !housesEmailField.getText().contains(".")) {
-                    System.out.println("Please enter a valid email address");
+                    enterHouseEmailWarning.setVisible(true);
+                } else {
+                    enterHouseEmailWarning.setVisible(false);
                 }
             }
         });
@@ -343,7 +365,7 @@ public class FXMLController implements Initializable {
             expenseNameField.getText().isBlank() ||
             expensePriceField.getText().isBlank() ||
             expenseDateField.getValue() == null) {
-            System.out.println("Please fill all the fields");
+            enterExpenseWarning.setVisible(true);
             return;
         }
         houseID = expenseHouseComboBox.getSelectionModel().getSelectedIndex() + 1;
@@ -356,9 +378,13 @@ public class FXMLController implements Initializable {
         System.out.println("Selected date: " + expenseDate);
         try{
             expensesTable.getItems().add(expenses.enterEntry(houseID, expenseName, expensePrice, expenseDate));
-            System.out.println("Successfully entered entry");
+            enterExpenseWarning.setVisible(false);
+            enterExpenseFailed.setVisible(false);
+            enterExpenseSuccess.setVisible(true);
         } catch(Exception e){
-            System.out.println("Failed to enter");
+            enterExpenseWarning.setVisible(false);
+            enterExpenseSuccess.setVisible(false);
+            enterExpenseFailed.setVisible(true);
         }
     }
 
@@ -372,7 +398,7 @@ public class FXMLController implements Initializable {
                 expenseNameField.getText().isBlank() ||
                 expensePriceField.getText().isBlank() ||
                 expenseDateField.getValue() == null) {
-            System.out.println("Please fill all the fields");
+            enterIncomeWarning.setVisible(true);
             return;
         }
         houseID = incomeHouseComboBox.getSelectionModel().getSelectedIndex() + 1;
@@ -387,9 +413,13 @@ public class FXMLController implements Initializable {
         System.out.println("Selected date due: " + dateDue);
         try{
             incomeTable.getItems().add(income.enterEntry(houseID, incomeName, incomeAmount, datePaid, dateDue));
-            System.out.println("Successfully entered entry");
+            enterIncomeWarning.setVisible(false);
+            enterIncomeFailed.setVisible(false);
+            enterIncomeSuccess.setVisible(true);
         } catch(Exception e){
-            System.out.println("Failed to enter");
+            enterIncomeWarning.setVisible(false);
+            enterIncomeSuccess.setVisible(false);
+            enterIncomeFailed.setVisible(true);
         }
     }
 
@@ -412,7 +442,7 @@ public class FXMLController implements Initializable {
             housesLastNameField.getText().isBlank() ||
             housesEmailField.getText().isBlank() ||
             housesPhoneField.getText().isBlank()) {
-            System.out.println("Please fill all the fields");
+            enterHouseWarning.setVisible(true);
             return;
         }
         streetAddress = housesStreetField.getText();
@@ -435,9 +465,13 @@ public class FXMLController implements Initializable {
         System.out.println("Selected phone number: " + phoneNumber);
         try {
             housesTable.getItems().add(houses.enterEntry(streetAddress, city, county, state, zipCode, firstName, lastName, email, phoneNumber));
-            System.out.println("Successfully entered entry");
+            enterHouseWarning.setVisible(false);
+            enterHouseFailed.setVisible(false);
+            enterHouseSuccess.setVisible(true);
         } catch(Exception e){
-            System.out.println("Failed to enter");
+            enterHouseWarning.setVisible(false);
+            enterHouseSuccess.setVisible(false);
+            enterHouseFailed.setVisible(true);
         }
     }
 }
