@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1236.0" prefWidth="1918.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.feardragon.rental_company_database_manager.FXMLController">
+<BorderPane prefHeight="1236.0" prefWidth="1918.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.feardragon.rental_company_database_manager.FXMLController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
@@ -87,67 +83,9 @@
                      <center>
                         <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <AnchorPane fx:id="enterExpenseMenu" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <Label layoutX="37.0" layoutY="37.0" text="House" />
-                                    <ComboBox fx:id="expenseHouseComboBox" layoutX="84.0" layoutY="33.0" prefHeight="25.0" prefWidth="275.0" />
-                                    <Label layoutX="37.0" layoutY="99.0" text="Expense Name" />
-                                    <TextField fx:id="expenseNameField" layoutX="147.0" layoutY="95.0" prefHeight="25.0" prefWidth="250.0" />
-                                    <Label layoutX="37.0" layoutY="163.0" text="Expense Price" />
-                                    <Label layoutX="37.0" layoutY="219.0" text="Date" />
-                                    <TextField fx:id="expensePriceField" layoutX="147.0" layoutY="159.0" onAction="#handleExpensePriceAction" prefHeight="25.0" prefWidth="125.0" />
-                                    <DatePicker fx:id="expenseDateField" layoutX="102.0" layoutY="215.0" />
-                                    <Button layoutX="76.0" layoutY="308.0" mnemonicParsing="false" onAction="#enterExpense" text="Enter" />
-                                    <Label fx:id="enterExpenseWarning" layoutX="145.0" layoutY="312.0" styleClass="custom-warning-message" stylesheets="@styles.css" text="Please fill in all the fields" visible="false" />
-                                    <Label fx:id="enterExpenseFailed" layoutX="145.0" layoutY="311.0" styleClass="custom-warning-message" stylesheets="@styles.css" text="Failed to enter" visible="false" />
-                                    <Label fx:id="enterExpenseSuccess" layoutX="145.0" layoutY="309.0" styleClass="custom-success-message" stylesheets="@styles.css" text="Successfully entered entry!" visible="false" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane fx:id="enterIncomeMenu" prefHeight="200.0" prefWidth="200.0" visible="false">
-                                 <children>
-                                    <Label layoutX="37.0" layoutY="37.0" text="House" />
-                                    <ComboBox fx:id="incomeHouseComboBox" layoutX="84.0" layoutY="33.0" prefHeight="25.0" prefWidth="275.0" />
-                                    <Label layoutX="37.0" layoutY="99.0" text="Income Name" />
-                                    <Label layoutX="37.0" layoutY="163.0" text="Income Amount" />
-                                    <Label layoutX="37.0" layoutY="219.0" text="Date Paid" />
-                                    <Label layoutX="37.0" layoutY="272.0" text="Due Date" />
-                                    <TextField fx:id="incomeNameField" layoutX="136.0" layoutY="95.0" prefHeight="25.0" prefWidth="250.0" />
-                                    <TextField fx:id="incomeAmountField" layoutX="147.0" layoutY="159.0" onAction="#handleIncomeAmountAction" prefWidth="125.0" />
-                                    <DatePicker fx:id="incomeDatePaid" layoutX="104.0" layoutY="215.0" />
-                                    <DatePicker fx:id="incomeDateDue" layoutX="104.0" layoutY="268.0" />
-                                    <Button layoutX="76.0" layoutY="345.0" mnemonicParsing="false" onAction="#enterIncome" text="Enter" />
-                                    <Label fx:id="enterIncomeWarning" layoutX="148.0" layoutY="351.0" styleClass="custom-warning-message" stylesheets="@styles.css" text="Please fill in all the fields" visible="false" />
-                                    <Label fx:id="enterIncomeFailed" layoutX="148.0" layoutY="351.0" styleClass="custom-warning-message" stylesheets="@styles.css" text="Failed to enter" visible="false" />
-                                    <Label fx:id="enterIncomeSuccess" layoutX="150.0" layoutY="351.0" styleClass="custom-success-message" stylesheets="@styles.css" text="Successfully entered entry!" visible="false" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane fx:id="enterHousesMenu" prefHeight="200.0" prefWidth="200.0" visible="false">
-                                 <children>
-                                    <Label layoutX="38.0" layoutY="37.0" text="Street Address" />
-                                    <TextField fx:id="housesStreetField" layoutX="134.0" layoutY="33.0" prefHeight="25.0" prefWidth="275.0" />
-                                    <Label layoutX="38.0" layoutY="99.0" text="City" />
-                                    <Label layoutX="272.0" layoutY="99.0" text="County" />
-                                    <TextField fx:id="housesCityField" layoutX="75.0" layoutY="95.0" />
-                                    <TextField fx:id="housesCountyField" layoutX="324.0" layoutY="95.0" />
-                                    <Label layoutX="38.0" layoutY="163.0" text="State" />
-                                    <ComboBox fx:id="housesStateComboBox" layoutX="78.0" layoutY="159.0" prefWidth="150.0" />
-                                    <Label layoutX="272.0" layoutY="163.0" text="Zip Code" />
-                                    <TextField fx:id="zipCodeField" layoutX="335.0" layoutY="159.0" />
-                                    <Label layoutX="37.0" layoutY="219.0" text="First Name" />
-                                    <TextField fx:id="housesFirstNameField" layoutX="116.0" layoutY="215.0" prefHeight="25.0" prefWidth="175.0" />
-                                    <Label layoutX="321.0" layoutY="219.0" text="Last Name" />
-                                    <TextField fx:id="housesLastNameField" layoutX="399.0" layoutY="215.0" prefHeight="25.0" prefWidth="175.0" />
-                                    <Label layoutX="38.0" layoutY="282.0" text="Email" />
-                                    <Label layoutX="38.0" layoutY="342.0" text="Phone Number" />
-                                    <TextField fx:id="housesEmailField" layoutX="86.0" layoutY="278.0" prefHeight="25.0" prefWidth="200.0" />
-                                    <TextField fx:id="housesPhoneField" layoutX="134.0" layoutY="338.0" onAction="#handleHousesPhoneAction" prefHeight="25.0" prefWidth="150.0" />
-                                    <Button layoutX="75.0" layoutY="415.0" mnemonicParsing="false" onAction="#enterHouse" text="Enter" />
-                                    <Label fx:id="enterHouseWarning" layoutX="142.0" layoutY="421.0" styleClass="custom-warning-message" stylesheets="@styles.css" text="Please fill in all the fields" visible="false" />
-                                    <Label fx:id="enterHouseFailed" layoutX="142.0" layoutY="421.0" styleClass="custom-warning-message" stylesheets="@styles.css" text="Failed to enter" visible="false" />
-                                    <Label fx:id="enterHouseSuccess" layoutX="143.0" layoutY="421.0" styleClass="custom-success-message" stylesheets="@styles.css" text="Successfully entered entry!" visible="false" />
-                                    <Label fx:id="enterHouseEmailWarning" layoutX="310.0" layoutY="282.0" styleClass="custom-warning-message" stylesheets="@styles.css" text="Please enter a valid email" visible="false" />
-                                 </children>
-                              </AnchorPane>
+                              <fx:include fx:id="enterExpenseMenu" source="EnterExpense.fxml" />
+                              <fx:include fx:id="enterIncomeMenu" source="EnterIncome.fxml" />
+                              <fx:include fx:id="enterHousesMenu" source="EnterHouse.fxml" />
                            </children>
                         </StackPane>
                      </center>

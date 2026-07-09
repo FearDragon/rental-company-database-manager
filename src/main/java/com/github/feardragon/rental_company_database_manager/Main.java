@@ -36,7 +36,6 @@ public class Main extends Application{
 
         FXMLController controller = loader.getController();
         controller.setTables(expenses, income, houses);
-        controller.setOptions();
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());

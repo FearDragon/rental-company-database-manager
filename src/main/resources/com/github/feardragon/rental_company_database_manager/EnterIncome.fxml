@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" visible="false" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.feardragon.rental_company_database_manager.EnterIncomeController">
+    <children>
+        <Label layoutX="37.0" layoutY="37.0" text="House" />
+        <ComboBox fx:id="incomeHouseComboBox" layoutX="84.0" layoutY="33.0" prefHeight="25.0" prefWidth="275.0" />
+        <Label layoutX="37.0" layoutY="99.0" text="Income Name" />
+        <Label layoutX="37.0" layoutY="163.0" text="Income Amount" />
+        <Label layoutX="37.0" layoutY="219.0" text="Date Paid" />
+        <Label layoutX="37.0" layoutY="272.0" text="Due Date" />
+        <TextField fx:id="incomeNameField" layoutX="136.0" layoutY="95.0" prefHeight="25.0" prefWidth="250.0" />
+        <TextField fx:id="incomeAmountField" layoutX="147.0" layoutY="159.0" onAction="#handleIncomeAmountAction" prefWidth="125.0" />
+        <DatePicker fx:id="incomeDatePaid" layoutX="104.0" layoutY="215.0" />
+        <DatePicker fx:id="incomeDateDue" layoutX="104.0" layoutY="268.0" />
+        <Button layoutX="76.0" layoutY="345.0" mnemonicParsing="false" onAction="#enterIncome" text="Enter" />
+        <Label fx:id="enterIncomeWarning" layoutX="148.0" layoutY="351.0" styleClass="custom-warning-message" stylesheets="@styles.css" text="Please fill in all the fields" visible="false" />
+        <Label fx:id="enterIncomeFailed" layoutX="148.0" layoutY="351.0" styleClass="custom-warning-message" stylesheets="@styles.css" text="Failed to enter" visible="false" />
+        <Label fx:id="enterIncomeSuccess" layoutX="150.0" layoutY="351.0" styleClass="custom-success-message" stylesheets="@styles.css" text="Successfully entered entry!" visible="false" />
+    </children>
+
+</AnchorPane>

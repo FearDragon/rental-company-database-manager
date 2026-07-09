@@ -20,7 +20,10 @@ public class Income {
     private static final String selectTable = "SELECT * FROM income";
     private static final String insertEntry = "INSERT INTO income (IncomeHouseID, IncomeName, IncomeAmount, DatePaid, DateDue) values (?, ?, ?, ?, ?)";
     private static final String getLastEntry = "SELECT * FROM income ORDER BY Income_id DESC LIMIT 1";
+
     HikariDataSource dataSource;
+
+    private final ObservableList<IncomeRow> table = FXCollections.observableArrayList();
 
     public Income (HikariDataSource dataSource){
         this.dataSource = dataSource;
@@ -76,18 +79,19 @@ public class Income {
             pstmt.setDate(5, dateDue);
             pstmt.executeUpdate();
             result = getEntryByID(getLastID());
+            table.add(result);
         }
         return result;
     }
 
     // Returns entire table
     public ObservableList<IncomeRow> getTable() throws SQLException{
-        ObservableList<IncomeRow> list = FXCollections.observableArrayList();
+        table.clear();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(selectTable)){
             try (ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()) {
-                    list.add(new IncomeRow(rs.getInt(1),
+                    table.add(new IncomeRow(rs.getInt(1),
                             getAddressByHouseID(rs.getInt(2)),
                             rs.getString(3),
                             rs.getBigDecimal(4),
@@ -96,7 +100,7 @@ public class Income {
                 }
             }
         }
-        return  list;
+        return table;
     }
 
     public String getAddressByHouseID(int house) throws SQLException{

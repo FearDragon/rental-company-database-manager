@@ -12,7 +12,10 @@ public class Houses {
     private static final String selectByID = "SELECT * FROM houses WHERE House_id = ?";
     private static final String insertEntry = "INSERT INTO houses (StreetAddress, City, County, State, ZipCode, FirstName, LastName, Email, PhoneNumber) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String getLastEntry = "SELECT * FROM houses ORDER BY House_id DESC LIMIT 1";
+
     HikariDataSource dataSource;
+
+    private final ObservableList<HouseRow> table = FXCollections.observableArrayList();
 
     public Houses(HikariDataSource dataSource) {
         this.dataSource = dataSource;
@@ -80,17 +83,18 @@ public class Houses {
             pstmt.setString(9, phoneNumber);
             pstmt.executeUpdate();
             result = getEntryByID(getLastID());
+            table.add(result);
         }
         return result;
     }
 
     public ObservableList<HouseRow> getTable() throws SQLException {
-        ObservableList<HouseRow> list = FXCollections.observableArrayList();
+        table.clear();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(selectTable)){
             try (ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()) {
-                    list.add(new HouseRow(rs.getInt(1),
+                    table.add(new HouseRow(rs.getInt(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getString(4),
@@ -103,7 +107,7 @@ public class Houses {
                 }
             }
         }
-        return  list;
+        return table;
     }
 
     public ObservableList<String> getAddresses() throws SQLException {
