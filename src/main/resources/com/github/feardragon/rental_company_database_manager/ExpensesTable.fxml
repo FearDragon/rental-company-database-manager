@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView prefHeight="200.0" prefWidth="1119.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.feardragon.rental_company_database_manager.ExpensesTableController">
+    <columns>
+        <TableColumn fx:id="expenseID" editable="false" prefWidth="50.0" text="ID" />
+        <TableColumn fx:id="expenseHouse" prefWidth="250.0" text="House" />
+        <TableColumn fx:id="expenseName" prefWidth="200.0" text="Name" />
+        <TableColumn fx:id="expensePrice" prefWidth="75.0" text="Price" />
+        <TableColumn fx:id="expenseDate" prefWidth="75.0" text="Date" />
+    </columns>
+</TableView>

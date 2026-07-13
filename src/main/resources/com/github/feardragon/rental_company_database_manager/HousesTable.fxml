@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TableView prefHeight="200.0" prefWidth="200.0" visible="false" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.feardragon.rental_company_database_manager.HousesTableController">
+    <columns>
+        <TableColumn fx:id="houseID" editable="false" prefWidth="50.0" text="ID" />
+        <TableColumn fx:id="houseAddress" prefWidth="200.0" text="Street Address" />
+        <TableColumn fx:id="houseCity" prefWidth="100.0" text="City" />
+        <TableColumn fx:id="houseCounty" prefWidth="100.0" text="County" />
+        <TableColumn fx:id="houseState" prefWidth="40.0" text="State" />
+        <TableColumn fx:id="houseZip" prefWidth="75.0" text="Zip Code" />
+        <TableColumn fx:id="houseFirstName" prefWidth="125.0" text="First Name" />
+        <TableColumn fx:id="houseLastName" prefWidth="125.0" text="Last Name" />
+        <TableColumn fx:id="houseEmail" prefWidth="200.0" text="Email" />
+        <TableColumn fx:id="housePhone" prefWidth="125.0" text="Phone Number" />
+    </columns>
+</TableView>

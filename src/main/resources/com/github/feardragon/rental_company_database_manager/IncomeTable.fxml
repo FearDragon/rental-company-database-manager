@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TableView prefHeight="200.0" prefWidth="200.0" visible="false" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.feardragon.rental_company_database_manager.IncomeTableController">
+    <columns>
+        <TableColumn fx:id="incomeID" editable="false" prefWidth="50.0" text="ID" />
+        <TableColumn fx:id="incomeHouse" prefWidth="250.0" text="House" />
+        <TableColumn fx:id="incomeName" prefWidth="200.0" text="Name" />
+        <TableColumn fx:id="incomeAmount" prefWidth="75.0" text="Amount" />
+        <TableColumn fx:id="datePaid" prefWidth="75.0" text="Date Paid" />
+        <TableColumn fx:id="dateDue" prefWidth="75.0" text="Due Date" />
+    </columns>
+</TableView>
