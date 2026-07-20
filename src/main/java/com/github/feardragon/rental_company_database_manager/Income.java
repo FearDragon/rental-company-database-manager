@@ -16,7 +16,7 @@ public class Income {
     private static final String selectByYearPaid = "SELECT * FROM income WHERE YEAR(DatePaid) = ?";
     private static final String selectByYearDue = "SELECT * FROM income WHERE YEAR(DateDue) = ?";
     private static final String selectByID = "SELECT * FROM income WHERE Income_id = ?";
-    private static final String selectAddressFromHouseID = "SELECT * FROM houses WHERE House_id = ?";
+    private static final String selectHouseFromHouseID = "SELECT * FROM houses WHERE House_id = ?";
     private static final String selectTable = "SELECT * FROM income";
     private static final String insertEntry = "INSERT INTO income (IncomeHouseID, IncomeName, IncomeAmount, DatePaid, DateDue) values (?, ?, ?, ?, ?)";
     private static final String getLastEntry = "SELECT * FROM income ORDER BY Income_id DESC LIMIT 1";
@@ -103,10 +103,24 @@ public class Income {
         return table;
     }
 
+    public int getHouseIDByID(int id) throws SQLException{
+        int results = -1;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(selectByID)){
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()){
+                while(rs.next()){
+                    results = rs.getInt(2);
+                }
+            }
+        }
+        return results;
+    }
+
     public String getAddressByHouseID(int house) throws SQLException{
         String address = "";
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(selectAddressFromHouseID)){
+             PreparedStatement pstmt = conn.prepareStatement(selectHouseFromHouseID)){
             pstmt.setInt(1, house);
             try (ResultSet rs = pstmt.executeQuery()){
                 while (rs.next()){

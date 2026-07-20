@@ -13,8 +13,7 @@ public class Expenses {
     private static final String selectByMonthYear = "SELECT * FROM expenses WHERE MONTH(ExpenseDate) = ? AND YEAR(ExpenseDate) = ?";
     private static final String selectByYear = "SELECT * FROM expenses WHERE YEAR(ExpenseDate) = ?";
     private static final String selectByID = "SELECT * FROM expenses WHERE Expense_id = ?";
-    private static final String selectByHouseID = "SELECT * FROM expenses WHERE ExpenseHouseID = ?";
-    private static final String selectAddressFromHouseID = "SELECT * FROM houses WHERE House_id = ?";
+    private static final String selectHouseFromHouseID = "SELECT * FROM houses WHERE House_id = ?";
     private static final String selectTable = "SELECT * FROM expenses";
     private static final String insertEntry = "INSERT INTO expenses (ExpenseHouseID, ExpenseName, ExpensePrice, ExpenseDate) values (?, ?, ?, ?)";
     private static final String getLastEntry = "SELECT * FROM expenses ORDER BY Expense_id DESC LIMIT 1";
@@ -95,14 +94,14 @@ public class Expenses {
         return table;
     }
 
-    public ArrayList<Integer> getIDByHouseID(int house) throws SQLException{
-        ArrayList<Integer> results = new ArrayList<>();
+    public int getHouseIDByID(int id) throws SQLException{
+        int results = -1;
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(selectByHouseID)){
-            pstmt.setInt(1, house);
+             PreparedStatement pstmt = conn.prepareStatement(selectByID)){
+            pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()){
-                    results.add(rs.getInt(1));
+                    results = rs.getInt(2);
                 }
             }
         }
@@ -112,7 +111,7 @@ public class Expenses {
     public String getAddressByHouseID(int house) throws SQLException{
         String address = "";
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(selectAddressFromHouseID)){
+             PreparedStatement pstmt = conn.prepareStatement(selectHouseFromHouseID)){
             pstmt.setInt(1, house);
             try (ResultSet rs = pstmt.executeQuery()){
                 while (rs.next()){

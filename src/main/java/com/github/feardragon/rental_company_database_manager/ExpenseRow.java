@@ -30,8 +30,8 @@ public class ExpenseRow {
          return expenseHouse;
      }
 
-     public void setExpenseHouse(String expenseHouseID){
-         this.expenseHouse = expenseHouseID;
+     public void setExpenseHouse(String expenseHouse){
+         this.expenseHouse = expenseHouse;
      }
 
      public String getExpenseName(){

@@ -51,16 +51,27 @@ public class FXMLController implements Initializable {
     @FXML
     private EnterHouseController enterHousesMenuController;
 
-    public void setTables(Expenses expenses, Income income, Houses houses) {
-        enterExpenseMenuController.setExpenses(expenses);
-        enterExpenseMenuController.setIncome(income);
-        enterExpenseMenuController.setHouses(houses);
-        enterIncomeMenuController.setExpenses(expenses);
-        enterIncomeMenuController.setIncome(income);
-        enterIncomeMenuController.setHouses(houses);
-        enterHousesMenuController.setExpenses(expenses);
-        enterHousesMenuController.setIncome(income);
-        enterHousesMenuController.setHouses(houses);
+    @FXML
+    private AnchorPane expensesInfo;
+    @FXML
+    private ExpensesInfoController expensesInfoController;
+
+    @FXML
+    private AnchorPane incomeInfo;
+    @FXML
+    private IncomeInfoController incomeInfoController;
+
+    @FXML
+    private AnchorPane housesInfo;
+    @FXML
+    private HousesInfoController housesInfoController;
+
+    public void setObjects(Expenses expenses, Income income, Houses houses) {
+        enterExpenseMenuController.setObjects(expenses, income, houses);
+        enterIncomeMenuController.setObjects(expenses, income, houses);
+        enterHousesMenuController.setObjects(expenses, income, houses);
+        expensesInfoController.setObjects(expenses, houses);
+        incomeInfoController.setObjects(income, houses);
 
         try {
             expensesTable.setItems(expenses.getTable());
@@ -73,24 +84,36 @@ public class FXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        expensesInfoController.setTable(expensesTable);
+        incomeInfoController.setTable(incomeTable);
+        housesInfoController.setTable(housesTable);
     }
 
     public void printIncome(ActionEvent event){
         incomeTable.setVisible(true);
+        incomeInfo.setVisible(true);
         expensesTable.setVisible(false);
+        expensesInfo.setVisible(false);
         housesTable.setVisible(false);
+        housesInfo.setVisible(false);
     }
 
     public void printExpenses(ActionEvent event){
         expensesTable.setVisible(true);
+        expensesInfo.setVisible(true);
         incomeTable.setVisible(false);
+        incomeInfo.setVisible(false);
         housesTable.setVisible(false);
+        housesInfo.setVisible(false);
     }
 
     public void printHouses(ActionEvent event){
         housesTable.setVisible(true);
+        housesInfo.setVisible(true);
         incomeTable.setVisible(false);
+        incomeInfo.setVisible(false);
         expensesTable.setVisible(false);
+        expensesInfo.setVisible(false);
     }
 
     public void printEnterExpenseMenu(ActionEvent event){

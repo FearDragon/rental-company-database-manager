@@ -110,6 +110,90 @@ public class Houses {
         return table;
     }
 
+    public String getCountyByID(int house) throws SQLException{
+        String county = "";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(selectByID)){
+            pstmt.setInt(1, house);
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    county = rs.getString(4);
+                }
+            }
+        }
+        return county;
+    }
+
+    public String getZipCodeByID(int house) throws SQLException{
+        String zipCode = "";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(selectByID)){
+            pstmt.setInt(1, house);
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    zipCode = rs.getString(6);
+                }
+            }
+        }
+        return zipCode;
+    }
+
+    public String getFirstNameByID(int house) throws SQLException{
+        String firstName = "";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(selectByID)){
+            pstmt.setInt(1, house);
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    firstName = rs.getString(7);
+                }
+            }
+        }
+        return firstName;
+    }
+
+    public String getLastNameByID(int house) throws SQLException{
+        String lastName = "";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(selectByID)){
+            pstmt.setInt(1, house);
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    lastName = rs.getString(8);
+                }
+            }
+        }
+        return lastName;
+    }
+
+    public String getEmailByID(int house) throws SQLException{
+        String email = "";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(selectByID)){
+            pstmt.setInt(1, house);
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    email = rs.getString(9);
+                }
+            }
+        }
+        return email;
+    }
+
+    public String getPhoneByID(int house) throws SQLException{
+        String phone = "";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(selectByID)){
+            pstmt.setInt(1, house);
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    phone = rs.getString(10);
+                }
+            }
+        }
+        return phone;
+    }
+
     public ObservableList<String> getAddresses() throws SQLException {
         ObservableList<String> list = FXCollections.observableArrayList();
         try (Connection conn = dataSource.getConnection();

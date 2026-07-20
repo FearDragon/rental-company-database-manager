@@ -53,15 +53,9 @@ public class EnterHouseController implements Initializable {
     private Income income;
     private Houses houses;
 
-    public void setExpenses(Expenses expenses){
+    public void setObjects(Expenses expenses,  Income income, Houses houses) {
         this.expenses = expenses;
-    }
-
-    public void setIncome(Income income){
         this.income = income;
-    }
-
-    public void setHouses(Houses houses){
         this.houses = houses;
 
         try {
