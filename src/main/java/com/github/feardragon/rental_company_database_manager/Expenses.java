@@ -16,6 +16,7 @@ public class Expenses {
     private static final String selectHouseFromHouseID = "SELECT * FROM houses WHERE House_id = ?";
     private static final String selectTable = "SELECT * FROM expenses";
     private static final String insertEntry = "INSERT INTO expenses (ExpenseHouseID, ExpenseName, ExpensePrice, ExpenseDate) values (?, ?, ?, ?)";
+    private static final String deleteEntry = "DELETE FROM expenses WHERE Expense_id = ?";
     private static final String getLastEntry = "SELECT * FROM expenses ORDER BY Expense_id DESC LIMIT 1";
 
     HikariDataSource dataSource;
@@ -75,6 +76,15 @@ public class Expenses {
             table.add(result);
         }
         return result;
+    }
+
+    public void deleteEntry(int expenseID) throws SQLException{
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(deleteEntry)){
+            pstmt.setInt(1, expenseID);
+            pstmt.executeUpdate();
+            table.remove(expenseID - 1);
+        }
     }
 
     public ObservableList<ExpenseRow> getTable() throws SQLException{

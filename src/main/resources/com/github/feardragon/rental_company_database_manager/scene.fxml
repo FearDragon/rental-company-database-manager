@@ -40,25 +40,48 @@
                      <top>
                         <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                           <items>
-                            <Button mnemonicParsing="false" text="Enter Entry" />
+                            <Button mnemonicParsing="false" onAction="#printEnterEntries" text="Enter Entry" />
+                              <Button mnemonicParsing="false" onAction="#printDeleteEntries" text="Delete Entry" />
                           </items>
                         </ToolBar>
                      </top>
                      <left>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="custom-menu-vbox" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+                        <StackPane BorderPane.alignment="CENTER">
                            <children>
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printEnterExpenseMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Expenses" VBox.vgrow="ALWAYS" />
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printEnterIncomeMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Income" VBox.vgrow="ALWAYS" />
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printEnterHousesMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Houses" VBox.vgrow="ALWAYS" />
+                              <VBox fx:id="enterEntriesSideMenu" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="custom-menu-vbox" stylesheets="@styles.css">
+                                 <children>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printEnterExpenseMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Expenses" VBox.vgrow="ALWAYS" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printEnterIncomeMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Income" VBox.vgrow="ALWAYS" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printEnterHousesMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Houses" VBox.vgrow="ALWAYS" />
+                                 </children>
+                              </VBox>
+                              <VBox fx:id="deleteEntriesSideMenu" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="custom-menu-vbox" stylesheets="@styles.css" visible="false">
+                                 <children>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printDeleteExpenseMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Expenses" VBox.vgrow="ALWAYS" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printDeleteIncomeMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Income" VBox.vgrow="ALWAYS" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printDeleteHousesMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Houses" VBox.vgrow="ALWAYS" />
+                                 </children>
+                              </VBox>
                            </children>
-                        </VBox>
+                        </StackPane>
                      </left>
                      <center>
                         <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <fx:include fx:id="enterExpenseMenu" source="EnterExpense.fxml" />
-                              <fx:include fx:id="enterIncomeMenu" source="EnterIncome.fxml" />
-                              <fx:include fx:id="enterHousesMenu" source="EnterHouse.fxml" />
+                              <StackPane fx:id="enterEntries" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <fx:include fx:id="enterExpenseMenu" source="EnterExpense.fxml" />
+                                    <fx:include fx:id="enterIncomeMenu" source="EnterIncome.fxml" />
+                                    <fx:include fx:id="enterHousesMenu" source="EnterHouse.fxml" />
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="deleteEntries" prefHeight="150.0" prefWidth="200.0" visible="false">
+                                 <children>
+                                    <fx:include fx:id="deleteExpenseMenu" source="DeleteExpense.fxml" />
+                                    <fx:include fx:id="deleteIncomeMenu" source="DeleteIncome.fxml" />
+                                    <fx:include fx:id="deleteHousesMenu" source="DeleteHouse.fxml" />
+                                 </children>
+                              </StackPane>
                            </children>
                         </StackPane>
                      </center>

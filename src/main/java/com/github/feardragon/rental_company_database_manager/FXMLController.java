@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class FXMLController implements Initializable {
 
@@ -27,11 +29,23 @@ public class FXMLController implements Initializable {
     @FXML
     private IncomeTableController incomeTableController;
 
-    // Houses table
+    // Houses Table
     @FXML
     private TableView<HouseRow> housesTable;
     @FXML
     private HousesTableController housesTableController;
+
+    // Enter entry menu
+    @FXML
+    private StackPane enterEntries;
+    @FXML
+    private VBox enterEntriesSideMenu;
+
+    // Delete entry menu
+    @FXML
+    private StackPane deleteEntries;
+    @FXML
+    private VBox deleteEntriesSideMenu;
 
     // Enter Expenses
     @FXML
@@ -51,20 +65,41 @@ public class FXMLController implements Initializable {
     @FXML
     private EnterHouseController enterHousesMenuController;
 
+    // Expenses info
     @FXML
     private AnchorPane expensesInfo;
     @FXML
     private ExpensesInfoController expensesInfoController;
 
+    // Income info
     @FXML
     private AnchorPane incomeInfo;
     @FXML
     private IncomeInfoController incomeInfoController;
 
+    // Houses info
     @FXML
     private AnchorPane housesInfo;
     @FXML
     private HousesInfoController housesInfoController;
+
+    // Delete Expenses
+    @FXML
+    private AnchorPane deleteExpenseMenu;
+    @FXML
+    private DeleteExpenseController deleteExpenseMenuController;
+
+    // Delete Income
+    @FXML
+    private AnchorPane deleteIncomeMenu;
+    @FXML
+    private DeleteIncomeController deleteIncomeMenuController;
+
+    // Delete Houses
+    @FXML
+    private AnchorPane deleteHousesMenu;
+    @FXML
+    private DeleteHouseController deleteHousesMenuController;
 
     public void setObjects(Expenses expenses, Income income, Houses houses) {
         enterExpenseMenuController.setObjects(expenses, income, houses);
@@ -72,6 +107,9 @@ public class FXMLController implements Initializable {
         enterHousesMenuController.setObjects(expenses, income, houses);
         expensesInfoController.setObjects(expenses, houses);
         incomeInfoController.setObjects(income, houses);
+        deleteExpenseMenuController.setExpenses(expenses);
+        deleteIncomeMenuController.setIncome(income);
+        deleteHousesMenuController.setHouses(houses);
 
         try {
             expensesTable.setItems(expenses.getTable());
@@ -116,6 +154,20 @@ public class FXMLController implements Initializable {
         expensesInfo.setVisible(false);
     }
 
+    public void printEnterEntries(ActionEvent event){
+        enterEntries.setVisible(true);
+        enterEntriesSideMenu.setVisible(true);
+        deleteEntries.setVisible(false);
+        deleteEntriesSideMenu.setVisible(false);
+    }
+
+    public void printDeleteEntries(ActionEvent event){
+        deleteEntries.setVisible(true);
+        deleteEntriesSideMenu.setVisible(true);
+        enterEntries.setVisible(false);
+        enterEntriesSideMenu.setVisible(false);
+    }
+
     public void printEnterExpenseMenu(ActionEvent event){
         enterExpenseMenu.setVisible(true);
         enterIncomeMenu.setVisible(false);
@@ -132,5 +184,23 @@ public class FXMLController implements Initializable {
         enterHousesMenu.setVisible(true);
         enterIncomeMenu.setVisible(false);
         enterExpenseMenu.setVisible(false);
+    }
+
+    public void printDeleteExpenseMenu(ActionEvent event){
+        deleteExpenseMenu.setVisible(true);
+        deleteIncomeMenu.setVisible(false);
+        deleteHousesMenu.setVisible(false);
+    }
+
+    public void printDeleteIncomeMenu(ActionEvent event){
+        deleteIncomeMenu.setVisible(true);
+        deleteExpenseMenu.setVisible(false);
+        deleteHousesMenu.setVisible(false);
+    }
+
+    public void printDeleteHousesMenu(ActionEvent event){
+        deleteHousesMenu.setVisible(true);
+        deleteIncomeMenu.setVisible(false);
+        deleteExpenseMenu.setVisible(false);
     }
 }
