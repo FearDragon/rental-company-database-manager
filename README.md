@@ -2,15 +2,11 @@
 
 ## Description
 
----
-
 A desktop database management program built with JavaFX and Gradle to manage a house rental company's income, expenses.
 
 > **Note:** Since I am learning as I go, I will be refactoring and updating the codebase as I learn new concepts and find ways to improve the program.
 
 ## Prerequisites & Dependencies
-
----
 
 ### Core Environment
 * **JDK 17 or higher**
@@ -31,8 +27,6 @@ A desktop database management program built with JavaFX and Gradle to manage a h
 * **JUnit 5 (v6.0.0 BOM)**
 
 ## 🛠️ Configuration
-
----
 
 Initialize your database by running the following command in your database's directory while replacing the placeholders with your database's information.
 ```bash
@@ -87,8 +81,6 @@ erDiagram
 ```
 
 ## 🚀 Running the Program
-
----
 
 ```bash
 ./gradlew run
