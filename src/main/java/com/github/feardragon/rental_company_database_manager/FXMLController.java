@@ -47,6 +47,12 @@ public class FXMLController implements Initializable {
     @FXML
     private VBox deleteEntriesSideMenu;
 
+    // Statistics
+    @FXML
+    private StackPane statistics;
+    @FXML
+    private VBox statisticsSideMenu;
+
     // Enter Expenses
     @FXML
     private AnchorPane enterExpenseMenu;
@@ -101,6 +107,42 @@ public class FXMLController implements Initializable {
     @FXML
     private DeleteHouseController deleteHousesMenuController;
 
+    // Yearly Profits
+    @FXML
+    private AnchorPane yearlyProfitMenu;
+    @FXML
+    private YearlyProfitController yearlyProfitMenuController;
+
+    // Monthly Profits
+    @FXML
+    private AnchorPane monthlyProfitMenu;
+    @FXML
+    private MonthlyProfitController monthlyProfitMenuController;
+
+    // Yearly Expenses
+    @FXML
+    private AnchorPane yearlyExpensesMenu;
+    @FXML
+    private YearlyExpensesController yearlyExpensesMenuController;
+
+    // Monthly Expenses
+    @FXML
+    private AnchorPane monthlyExpensesMenu;
+    @FXML
+    private MonthlyExpensesController monthlyExpensesMenuController;
+
+    // Yearly Income
+    @FXML
+    private AnchorPane yearlyIncomeMenu;
+    @FXML
+    private YearlyIncomeController yearlyIncomeMenuController;
+
+    // Monthly Income
+    @FXML
+    private AnchorPane monthlyIncomeMenu;
+    @FXML
+    private MonthlyIncomeController monthlyIncomeMenuController;
+
     public void setObjects(Expenses expenses, Income income, Houses houses) {
         enterExpenseMenuController.setObjects(expenses, income, houses);
         enterIncomeMenuController.setObjects(expenses, income, houses);
@@ -110,6 +152,12 @@ public class FXMLController implements Initializable {
         deleteExpenseMenuController.setExpenses(expenses);
         deleteIncomeMenuController.setIncome(income);
         deleteHousesMenuController.setHouses(houses);
+        yearlyProfitMenuController.setObjects(expenses, income, houses);
+        monthlyProfitMenuController.setObjects(expenses, income, houses);
+        yearlyExpensesMenuController.setObjects(expenses, income, houses);
+        monthlyExpensesMenuController.setObjects(expenses, income, houses);
+        yearlyIncomeMenuController.setObjects(expenses, income, houses);
+        monthlyIncomeMenuController.setObjects(expenses, income, houses);
 
         try {
             expensesTable.setItems(expenses.getTable());
@@ -159,6 +207,8 @@ public class FXMLController implements Initializable {
         enterEntriesSideMenu.setVisible(true);
         deleteEntries.setVisible(false);
         deleteEntriesSideMenu.setVisible(false);
+        statistics.setVisible(false);
+        statisticsSideMenu.setVisible(false);
     }
 
     public void printDeleteEntries(ActionEvent event){
@@ -166,6 +216,17 @@ public class FXMLController implements Initializable {
         deleteEntriesSideMenu.setVisible(true);
         enterEntries.setVisible(false);
         enterEntriesSideMenu.setVisible(false);
+        statistics.setVisible(false);
+        statisticsSideMenu.setVisible(false);
+    }
+
+    public void printStatistics(ActionEvent event){
+        statistics.setVisible(true);
+        statisticsSideMenu.setVisible(true);
+        enterEntries.setVisible(false);
+        enterEntriesSideMenu.setVisible(false);
+        deleteEntries.setVisible(false);
+        deleteEntriesSideMenu.setVisible(false);
     }
 
     public void printEnterExpenseMenu(ActionEvent event){
@@ -202,5 +263,59 @@ public class FXMLController implements Initializable {
         deleteHousesMenu.setVisible(true);
         deleteIncomeMenu.setVisible(false);
         deleteExpenseMenu.setVisible(false);
+    }
+
+    public void printYearlyProfitMenu(ActionEvent event){
+        yearlyProfitMenu.setVisible(true);
+        yearlyIncomeMenu.setVisible(false);
+        yearlyExpensesMenu.setVisible(false);
+        monthlyProfitMenu.setVisible(false);
+        monthlyIncomeMenu.setVisible(false);
+        monthlyExpensesMenu.setVisible(false);
+    }
+
+    public void printMonthlyProfitMenu(ActionEvent event){
+        monthlyProfitMenu.setVisible(true);
+        monthlyIncomeMenu.setVisible(false);
+        monthlyExpensesMenu.setVisible(false);
+        yearlyProfitMenu.setVisible(false);
+        yearlyIncomeMenu.setVisible(false);
+        yearlyExpensesMenu.setVisible(false);
+    }
+
+    public void printYearlyExpensesMenu(ActionEvent event){
+        yearlyExpensesMenu.setVisible(true);
+        yearlyIncomeMenu.setVisible(false);
+        yearlyProfitMenu.setVisible(false);
+        monthlyExpensesMenu.setVisible(false);
+        monthlyIncomeMenu.setVisible(false);
+        monthlyProfitMenu.setVisible(false);
+    }
+
+    public void printMonthlyExpensesMenu(ActionEvent event){
+        monthlyExpensesMenu.setVisible(true);
+        monthlyIncomeMenu.setVisible(false);
+        monthlyProfitMenu.setVisible(false);
+        yearlyExpensesMenu.setVisible(false);
+        yearlyIncomeMenu.setVisible(false);
+        yearlyProfitMenu.setVisible(false);
+    }
+
+    public void printYearlyIncomeMenu(ActionEvent event){
+        yearlyIncomeMenu.setVisible(true);
+        yearlyExpensesMenu.setVisible(false);
+        yearlyProfitMenu.setVisible(false);
+        monthlyIncomeMenu.setVisible(false);
+        monthlyProfitMenu.setVisible(false);
+        monthlyExpensesMenu.setVisible(false);
+    }
+
+    public void printMonthlyIncomeMenu(ActionEvent event){
+        monthlyIncomeMenu.setVisible(true);
+        monthlyExpensesMenu.setVisible(false);
+        monthlyProfitMenu.setVisible(false);
+        yearlyIncomeMenu.setVisible(false);
+        yearlyProfitMenu.setVisible(false);
+        yearlyExpensesMenu.setVisible(false);
     }
 }

@@ -42,6 +42,7 @@
                           <items>
                             <Button mnemonicParsing="false" onAction="#printEnterEntries" text="Enter Entry" />
                               <Button mnemonicParsing="false" onAction="#printDeleteEntries" text="Delete Entry" />
+                              <Button mnemonicParsing="false" onAction="#printStatistics" text="Statistics" />
                           </items>
                         </ToolBar>
                      </top>
@@ -62,6 +63,16 @@
                                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printDeleteHousesMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Houses" VBox.vgrow="ALWAYS" />
                                  </children>
                               </VBox>
+                              <VBox fx:id="statisticsSideMenu" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="custom-menu-vbox" stylesheets="@styles.css" visible="false">
+                                 <children>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printYearlyProfitMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Yearly &#10;profit" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printMonthlyProfitMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Monthly &#10;profit" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printYearlyExpensesMenu" styleClass="custom-menu-button" stylesheets="@styles.css" text="Yearly &#10;expenses" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printMonthlyExpensesMenu" styleClass="custom-menu-button" text="Monthly expenses" textAlignment="CENTER" wrapText="true" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printYearlyIncomeMenu" styleClass="custom-menu-button" text="Yearly &#10;income" textAlignment="CENTER" wrapText="true" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printMonthlyIncomeMenu" styleClass="custom-menu-button" text="Monthly income" textAlignment="CENTER" wrapText="true" />
+                                 </children>
+                              </VBox>
                            </children>
                         </StackPane>
                      </left>
@@ -80,6 +91,16 @@
                                     <fx:include fx:id="deleteExpenseMenu" source="DeleteExpense.fxml" />
                                     <fx:include fx:id="deleteIncomeMenu" source="DeleteIncome.fxml" />
                                     <fx:include fx:id="deleteHousesMenu" source="DeleteHouse.fxml" />
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="statistics" prefHeight="150.0" prefWidth="200.0" visible="false">
+                                 <children>
+                                    <fx:include fx:id="yearlyProfitMenu" source="YearlyProfit.fxml" />
+                                    <fx:include fx:id="monthlyProfitMenu" source="MonthlyProfit.fxml" />
+                                    <fx:include fx:id="yearlyExpensesMenu" source="YearlyExpenses.fxml" />
+                                    <fx:include fx:id="monthlyExpensesMenu" source="MonthlyExpenses.fxml" />
+                                    <fx:include fx:id="yearlyIncomeMenu" source="YearlyIncome.fxml" />
+                                    <fx:include fx:id="monthlyIncomeMenu" source="MonthlyIncome.fxml" />
                                  </children>
                               </StackPane>
                            </children>

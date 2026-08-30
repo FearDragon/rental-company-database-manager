@@ -9,12 +9,12 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Income {
-    private static final String selectByMonthPaid = "SELECT * FROM income WHERE MONTH(DatePaid) = ?";
-    private static final String selectByMonthDue = "SELECT * FROM income WHERE MONTH(DateDue) = ?";
-    private static final String selectByMonthYearPaid = "SELECT * FROM income WHERE MONTH(DatePaid) = ? AND YEAR(DatePaid) = ?";
-    private static final String selectByMonthYearDue = "SELECT * FROM income WHERE MONTH(DateDue) = ? AND YEAR(DateDue) = ?";
+    private static final String selectByMonthPaid = "SELECT * FROM income WHERE MONTH(DatePaid) = ? AND YEAR(DatePaid) = ?";
+    private static final String selectByMonthDue = "SELECT * FROM income WHERE MONTH(DateDue) = ? AND YEAR(DateDue) = ?";
+    private static final String selectByMonthPaidAndHouse = "SELECT * FROM income WHERE MONTH(DatePaid) = ? AND YEAR(DatePaid) = ? AND IncomeHouseID = ?";
     private static final String selectByYearPaid = "SELECT * FROM income WHERE YEAR(DatePaid) = ?";
     private static final String selectByYearDue = "SELECT * FROM income WHERE YEAR(DateDue) = ?";
+    private static final String selectByYearPaidAndHouse = "SELECT * FROM income WHERE YEAR(DatePaid) = ? AND IncomeHouseID = ?";
     private static final String selectByID = "SELECT * FROM income WHERE Income_id = ?";
     private static final String selectHouseFromHouseID = "SELECT * FROM houses WHERE House_id = ?";
     private static final String selectTable = "SELECT * FROM income";
@@ -141,90 +141,63 @@ public class Income {
         return address;
     }
 
-    // Returns an array list of integers containing the income_id of all entries of the inputted month and year
-    public ArrayList<Integer> getIDByMonthYearPaid(int month, int year) throws SQLException{
-        ArrayList<Integer> results = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(selectByMonthYearPaid)){
-            pstmt.setInt(1, month);
-            pstmt.setInt(2, year);
-            try (ResultSet rs = pstmt.executeQuery()){
-                while(rs.next()){
-                    results.add(rs.getInt(1));
-                }
-            }
-        }
-        return results;
-    }
-
-    public ArrayList<Integer> getIDByMonthYearDue(int month, int year) throws SQLException{
-        ArrayList<Integer> results = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(selectByMonthYearDue)){
-            pstmt.setInt(1, month);
-            pstmt.setInt(2, year);
-            try (ResultSet rs = pstmt.executeQuery()){
-                while(rs.next()){
-                    results.add(rs.getInt(1));
-                }
-            }
-        }
-        return results;
-    }
-
-    public ArrayList<Integer> getIDByYearPaid (int year) throws SQLException{
-        ArrayList<Integer> results = new ArrayList<>();
+    public BigDecimal getYearlyIncome(int year) throws SQLException{
+        BigDecimal result = BigDecimal.ZERO;
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(selectByYearPaid)){
             pstmt.setInt(1, year);
             try (ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()){
-                    results.add(rs.getInt(1));
+                    result = result.add(rs.getBigDecimal(4));
                 }
             }
         }
-        return results;
+        return result;
     }
 
-    public ArrayList<Integer> getIDByYearDue (int year) throws SQLException{
-        ArrayList<Integer> results = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(selectByYearDue)){
-            pstmt.setInt(1, year);
-            try (ResultSet rs = pstmt.executeQuery()){
-                while(rs.next()){
-                    results.add(rs.getInt(1));
-                }
-            }
-        }
-        return results;
-    }
-
-    public ArrayList<Integer> getIDByMonthPaid (int month) throws SQLException{
-        ArrayList<Integer> results = new ArrayList<>();
+    public BigDecimal getMonthlyIncome(int month, int year) throws SQLException{
+        BigDecimal result = BigDecimal.ZERO;
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(selectByMonthPaid)){
             pstmt.setInt(1, month);
+            pstmt.setInt(2, year);
             try (ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()){
-                    results.add(rs.getInt(1));
+                    result = result.add(rs.getBigDecimal(4));
                 }
             }
         }
-        return results;
+        return result;
     }
 
-    public ArrayList<Integer> getIDByMonthDue (int month) throws SQLException{
-        ArrayList<Integer> results = new ArrayList<>();
+    public BigDecimal getYearlyIncomeByHouse(int year, int house) throws SQLException{
+        BigDecimal result = BigDecimal.ZERO;
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(selectByMonthDue)){
-            pstmt.setInt(1, month);
+             PreparedStatement pstmt = conn.prepareStatement(selectByYearPaidAndHouse)){
+            pstmt.setInt(1, year);
+            pstmt.setInt(2, house);
             try (ResultSet rs = pstmt.executeQuery()){
-                while(rs.next()){
-                    results.add(rs.getInt(1));
+                while (rs.next()){
+                    result = result.add(rs.getBigDecimal(4));
                 }
             }
         }
-        return results;
+        return result;
+    }
+
+    public BigDecimal getMonthlyIncomeByHouse(int month, int year, int house) throws SQLException{
+        BigDecimal result = BigDecimal.ZERO;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(selectByMonthPaidAndHouse)){
+            pstmt.setInt(1, month);
+            pstmt.setInt(2, year);
+            pstmt.setInt(3, house);
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    result = result.add(rs.getBigDecimal(4));
+                }
+            }
+        }
+        return result;
     }
 }

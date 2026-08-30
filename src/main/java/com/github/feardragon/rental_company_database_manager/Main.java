@@ -48,48 +48,4 @@ public class Main extends Application{
     public static void main(String[] args){
         launch(args);
     }
-
-    public static BigDecimal profitByMonthYear(Income income, Expenses expenses, int month, int year) throws SQLException{
-        BigDecimal totalIncome = BigDecimal.ZERO;
-        BigDecimal totalExpenses = BigDecimal.ZERO;
-        BigDecimal profit;
-        ArrayList<Integer> expensePositions = expenses.getIDByMonthYear(month, year);
-        ArrayList<Integer> incomePositions = income.getIDByMonthYearPaid(month, year);
-        for (Integer position: incomePositions){
-            totalIncome = totalIncome.add(income.getEntryByID(position).getIncomeAmount());
-        }
-        for (Integer position: expensePositions){
-            totalExpenses = totalExpenses.add(expenses.getEntryByID(position).getExpensePrice());
-        }
-        profit = totalIncome.subtract(totalExpenses);
-        return profit;
-    }
-
-    public static void printExpenseByYear(Expenses expenses, int year) throws SQLException{
-        ArrayList<Integer> positions = expenses.getIDByYear(year);
-        for (Integer position: positions){
-            System.out.println(expenses.getEntryByID(position));
-        }
-    }
-
-    public static void printExpenseByMonth(Expenses expenses, int month) throws SQLException{
-        ArrayList<Integer> positions = expenses.getIDByMonth(month);
-        for (Integer position: positions){
-            System.out.println(expenses.getEntryByID(position));
-        }
-    }
-
-    public static void printIncomeByMonthPaid(Income income, int month) throws SQLException{
-        ArrayList<Integer> positions = income.getIDByMonthPaid(month);
-        for (Integer position: positions){
-            System.out.println(income.getEntryByID(position));
-        }
-    }
-
-    public static void printIncomeByMonthDue(Income income, int month) throws SQLException{
-        ArrayList<Integer> positions = income.getIDByMonthDue(month);
-        for (Integer position: positions){
-            System.out.println(income.getEntryByID(position));
-        }
-    }
 }
